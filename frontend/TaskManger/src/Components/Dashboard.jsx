@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://localhost:8080/api/tasks');
+        const response = await fetch('/api/tasks');
         if (response.ok) {
           const data = await response.json();
           console.log("Fetched tasks from backend:", data);  // <-- Add this
@@ -30,10 +30,10 @@ const Dashboard = () => {
         console.error('Error:', error);
       }
     };
-  
+
     fetchTasks();
   }, []);
-  
+
 
   // Update task summary (total, completed, pending tasks)
   const updateTaskSummary = (data) => {
@@ -50,9 +50,23 @@ const Dashboard = () => {
   };
 
   // Handler for task deletion
-  const handleDelete = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
+  const handleDelete = async (taskId) => {
+    try {
+      const response = await fetch(`/api/tasks/${taskId}`, {
+        method: 'DELETE',
+      });
+  
+      if (response.ok) {
+        // If successfully deleted from the backend, remove from UI
+        setTasks(tasks.filter(task => task.id !== taskId));
+      } else {
+        console.error('Failed to delete task from the backend');
+      }
+    } catch (error) {
+      console.error('Error deleting task:', error);
+    }
   };
+  
 
   // Handler for task update (just a placeholder for now)
   const handleUpdate = (taskId) => {

@@ -49,7 +49,7 @@
 }
 
 .task-summary-item {
-  background: linear-gradient(to right, #e0f7fa, #ffffff);
+  background: linear-gradient(to right, #67cbd8, #85cdd3);
   padding: 20px;
   border-radius: 10px;
   flex: 1;
@@ -98,8 +98,8 @@
 }
 
 .task-card {
-  background-color: #ffffff;
-  border: 1px solid #ddd;
+  background-color: #7f9fa5;
+  border: 1px solid #769a96;
   padding: 20px;
   margin-bottom: 20px;
   border-radius: 10px;
@@ -165,7 +165,7 @@
   padding: 25px;
   max-width: 550px;
   margin: auto;
-  background-color: #fefefe;
+  background-color: #74e6f8;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
