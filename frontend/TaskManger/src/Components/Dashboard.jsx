@@ -20,7 +20,7 @@ const Dashboard = () => {
         const response = await fetch('/api/tasks');
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched tasks from backend:", data);  // <-- Add this
+          console.log("Fetched tasks from backend:", data);  
           setTasks(data);
           updateTaskSummary(data);
         } else {
