@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
-import AddTaskForm from './AddTaskForm'; // Import the AddTaskForm
+import AddTaskForm from './AddTaskForm';
+import EditTaskForm from './EditTaskForm';
 
 const Dashboard = () => {
   const [tasks, setTasks] = useState([]);  // Store tasks in state
@@ -12,6 +13,8 @@ const Dashboard = () => {
   const [showAllTasks, setShowAllTasks] = useState(false); // State to control task list visibility
   const [showAddTaskForm, setShowAddTaskForm] = useState(false); // State to control form visibility
   const [selectedTask, setSelectedTask] = useState(null); // State for selected task for view details modal
+  const [editingTask, setEditingTask] = useState(null); // Track the task being edited
+
 
   // Fetch tasks from the backend when the component mounts
   useEffect(() => {
@@ -20,7 +23,7 @@ const Dashboard = () => {
         const response = await fetch('/api/tasks');
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched tasks from backend:", data);  
+          console.log("Fetched tasks from backend:", data);
           setTasks(data);
           updateTaskSummary(data);
         } else {
@@ -55,7 +58,7 @@ const Dashboard = () => {
       const response = await fetch(`/api/tasks/${taskId}`, {
         method: 'DELETE',
       });
-  
+
       if (response.ok) {
         // If successfully deleted from the backend, remove from UI
         setTasks(tasks.filter(task => task.id !== taskId));
@@ -66,22 +69,30 @@ const Dashboard = () => {
       console.error('Error deleting task:', error);
     }
   };
-  
 
-  // Handler for task update (just a placeholder for now)
+
   const handleUpdate = (taskId) => {
-    alert(`Update task with ID: ${taskId}`);
+    const taskToEdit = tasks.find((task) => task.id === taskId);
+    setEditingTask(taskToEdit); // Open the edit form with the selected task
+
   };
+  const handleTaskUpdated = (updatedTask) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+    setEditingTask(null); // Close the edit form
+  };
+
 
   // Handler for viewing task details
   const handleViewDetails = (taskId) => {
     const task = tasks.find((task) => task.id === taskId);
-    setSelectedTask(task);  // Set the selected task to show in the modal
+    setSelectedTask(task);  
   };
 
   // Close the task details modal
   const closeTaskDetails = () => {
-    setSelectedTask(null);  // Close the modal by resetting selected task
+    setSelectedTask(null);  
   };
 
   return (
@@ -163,6 +174,17 @@ const Dashboard = () => {
           </div>
         </div>
       )}
+      {editingTask && (
+        <div className="edit-task-overlay">
+          <EditTaskForm
+            task={editingTask}
+            onUpdate={handleTaskUpdated}
+            onCancel={() => setEditingTask(null)}
+          />
+        </div>
+      )}
+
+
     </div>
   );
 };

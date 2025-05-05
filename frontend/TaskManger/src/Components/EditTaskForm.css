@@ -1,0 +1,104 @@
+/* EditTaskForm.css */
+
+/* Overlay for modal appearance */
+.edit-task-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 20, 20, 0.5); /* Slightly dimmer background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem; /* Ensures there's some space around the form */
+}
+
+/* Form container */
+.edit-task-form {
+  background: #fff;
+  border-radius: 8px;
+  padding: 2rem; /* Balanced padding for a spacious feel */
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Simple shadow */
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding does not affect width */
+}
+
+/* Heading style */
+.edit-task-form h3 {
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #333;
+  margin-top: 0; /* Remove top margin to fit neatly at the top */
+}
+
+/* Input, textarea, and select fields */
+.edit-task-form input,
+.edit-task-form textarea,
+.edit-task-form select {
+  width: 100%;
+  padding: 0.8rem 1rem; /* Add horizontal padding for better touch area */
+  margin-bottom: 1rem; /* Space between form fields */
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box; /* Ensures padding doesn't affect width */
+}
+
+/* Focus state for inputs and selects */
+.edit-task-form input:focus,
+.edit-task-form textarea:focus,
+.edit-task-form select:focus {
+  outline: none;
+  border-color: #007bff; /* Blue border on focus */
+}
+
+/* Text area style */
+.edit-task-form textarea {
+  resize: vertical;
+  min-height: 120px; /* More height for comfort */
+}
+
+/* Button styling */
+.edit-task-form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem; /* Space between form fields and buttons */
+}
+
+.edit-task-form button {
+  padding: 0.7rem 1.5rem; /* Slightly more padding for the buttons */
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+/* Update button */
+.edit-task-form .update-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Cancel button */
+.edit-task-form .cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+/* Button hover effect */
+.edit-task-form button:hover {
+  background-color: #0056b3; /* Darker shade on hover for update button */
+}
+
+.edit-task-form button:active {
+  background-color: #003f7f; /* Even darker on active state */
+}
+

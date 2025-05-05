@@ -61,15 +61,17 @@ public class TaskServiceImpl implements TaskService {
     public TaskDTO updateTask(long id, TaskDTO taskDTO) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found with id: " + id));
-
+    
         existingTask.setTitle(taskDTO.getTitle());
         existingTask.setDescription(taskDTO.getDescription());
+        existingTask.setStatus(taskDTO.getStatus()); // Add this line to update status
         existingTask.setDueDate(taskDTO.getDueDate());
         existingTask.setUpdatedAt(LocalDateTime.now());
-
+    
         Task updatedTask = taskRepository.save(existingTask);
         return modelMapper.map(updatedTask, TaskDTO.class);
     }
+    
 
     @Override
     public void deleteTask(long id) {
